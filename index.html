@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flamingos Divine Vintage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+          --pink:#e040c8;
+          --pink-light:#f5a8e8;
+          --pink-pale:#fdf0fc;
+          --black:#1a1a1a;
+          --charcoal:#2d2d2d;
+          --white:#ffffff;
+          --serif:'Playfair Display',Georgia,serif;
+          --sans:'DM Sans',sans-serif;
+        }
+        html{scroll-behavior:smooth;scroll-padding-top:65px}
+        body{font-family:var(--sans);background:var(--pink-pale);color:var(--black);line-height:1.6;min-height:100vh}
+        nav{background:var(--black);padding:0.9rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:65px}
+        .nav-logo{display:flex;align-items:center;gap:0.75rem}
+        .nav-logo img{width:42px;height:42px;border-radius:50%;object-fit:cover}
+        .nav-logo span{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--pink-light);letter-spacing:0.02em}
+        .nav-links{display:flex;gap:1.5rem;list-style:none}
+        .nav-links a{color:var(--pink-light);text-decoration:none;font-size:0.82rem;font-weight:300;letter-spacing:0.08em;text-transform:uppercase;transition:color 0.2s}
+        .nav-links a:hover{color:var(--white)}
+        .hero{background:var(--black);padding:4rem 2rem 3.5rem;text-align:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 110%,rgba(224,64,200,0.2) 0%,transparent 70%);pointer-events:none}
+        .hero-logo{width:220px;height:220px;border-radius:50%;object-fit:cover;margin:0 auto 1.5rem;display:block;border:4px solid var(--pink);box-shadow:0 0 0 8px rgba(224,64,200,0.15)}
+        .hero-eyebrow{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);margin-bottom:0.75rem}
+        .hero h1{font-family:var(--serif);font-size:clamp(2.6rem,7vw,4.5rem);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:0.4rem}
+        .hero h1 em{color:var(--pink);font-style:italic}
+        .hero-sub{font-family:var(--serif);font-style:italic;color:var(--pink-light);font-size:1.05rem;margin-bottom:1.2rem}
+        .hero-tagline{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4)}
+        .carousel-section{background:var(--black);padding:0 0 2.5rem}
+        .carousel-wrapper{position:relative;overflow:hidden;max-width:860px;margin:0 auto}
+        .carousel-track{display:flex;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+        .carousel-slide{min-width:100%;height:380px;background-size:cover;background-position:center;background-repeat:no-repeat;position:relative;display:flex;align-items:center;justify-content:center}
+        .slide-1{background-color:#2a1a1e}
+        .slide-2{background-color:#1a1a2a}
+        .slide-3{background-color:#1a2a1a}
+        .slide-4{background-color:#2a2a1a}
+        .slide-5{background-color:#1a1a2a}
+        .slide-overlay{position:relative;z-index:2;text-align:center;color:var(--white);padding:2rem;background:rgba(0,0,0,0.45);border-radius:6px;max-width:420px;margin:0 1rem}
+        .slide-icon{font-size:3rem;margin-bottom:0.8rem;display:block}
+        .slide-overlay h3{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--pink-light);margin-bottom:0.4rem}
+        .slide-overlay p{font-size:0.88rem;color:rgba(255,255,255,0.75);font-weight:300;line-height:1.6}
+        .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(224,64,200,0.85);border:none;color:var(--white);width:38px;height:38px;border-radius:50%;font-size:1rem;cursor:pointer;z-index:10;transition:background 0.2s,transform 0.2s;display:flex;align-items:center;justify-content:center}
+        .carousel-btn:hover{background:var(--pink);transform:translateY(-50%) scale(1.08)}
+        .carousel-btn.prev{left:1rem}
+        .carousel-btn.next{right:1rem}
+        .carousel-dots{display:flex;justify-content:center;gap:8px;padding:1rem 0 0}
+        .dot{width:7px;height:7px;border-radius:50%;background:rgba(224,64,200,0.3);border:none;cursor:pointer;transition:background 0.2s,transform 0.2s;padding:0}
+        .dot.active{background:var(--pink);transform:scale(1.3)}
+        .next-sale-banner{background:var(--pink);color:var(--white);text-align:center;padding:1.2rem 2rem}
+        .next-sale-banner p{font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.85;margin-bottom:0.25rem}
+        .next-sale-banner strong{font-family:var(--serif);font-size:1.4rem;font-weight:700}
+        .next-sale-banner span{display:block;font-size:0.78rem;opacity:0.9;margin-top:0.2rem;letter-spacing:0.05em}
+        .main-grid{max-width:900px;margin:0 auto;padding:3rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem}
+        .card{background:var(--white);border:1px solid var(--pink-light);border-radius:4px;padding:1.75rem}
+        .card-title{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--black);margin-bottom:1.1rem;padding-bottom:0.7rem;border-bottom:2px solid var(--pink-light)}
+        .dates-list{list-style:none;display:flex;flex-direction:column}
+        .dates-list li{display:flex;align-items:center;gap:0.6rem;font-size:0.87rem;color:var(--charcoal);padding:0.45rem 0;border-bottom:1px solid #f5e0e5}
+        .dates-list li:last-child{border-bottom:none}
+        .date-dot{width:7px;height:7px;border-radius:50%;background:var(--pink);flex-shrink:0}
+        .date-special{font-size:0.65rem;background:var(--pink);color:var(--white);padding:2px 6px;border-radius:2px;letter-spacing:0.04em;margin-left:auto;white-space:nowrap}
+        .hours-note{background:var(--pink-pale);border-left:3px solid var(--pink);padding:0.7rem 1rem;font-size:0.82rem;color:var(--charcoal);margin-top:1rem;border-radius:0 3px 3px 0;line-height:1.5}
+        .about-text{font-size:0.88rem;color:var(--charcoal);line-height:1.8}
+        .tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem}
+        .tag{font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;background:var(--pink-pale);color:var(--pink);border:1px solid var(--pink-light);padding:0.22rem 0.55rem;border-radius:2px}
+        .contact-item{display:flex;flex-direction:column;gap:0.15rem;margin-bottom:0.9rem;padding-bottom:0.9rem;border-bottom:1px solid #f5e0e5}
+        .contact-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+        .contact-label{font-size:0.63rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--pink);font-weight:500}
+        .contact-value{font-size:0.88rem;color:var(--charcoal)}
+        .contact-link{font-size:0.88rem;color:var(--black);text-decoration:none;font-weight:500;transition:color 0.2s}
+        .contact-link:hover{color:var(--pink)}
+        .social-row{display:flex;gap:0.6rem;margin-top:0.4rem;flex-wrap:wrap}
+        .social-btn{display:inline-flex;align-items:center;gap:0.45rem;background:var(--black);color:var(--white);text-decoration:none;font-size:0.78rem;font-weight:500;letter-spacing:0.04em;padding:0.5rem 0.9rem;border-radius:3px;transition:background 0.2s}
+        .social-btn:hover{background:var(--pink)}
+        .social-btn svg{width:13px;height:13px;fill:currentColor}
+        .award-strip{background:var(--charcoal);text-align:center;padding:1.4rem 2rem;color:var(--pink-light);font-family:var(--serif);font-style:italic;font-size:0.9rem;letter-spacing:0.03em}
+        .award-strip strong{color:var(--pink);font-style:normal;font-weight:700}
+        footer{background:var(--black);color:rgba(255,255,255,0.4);text-align:center;padding:2rem;font-size:0.72rem;letter-spacing:0.07em}
+        footer a{color:var(--pink-light);text-decoration:none}
+        @media(max-width:600px){
+          .main-grid{grid-template-columns:1fr;padding:2rem 1.2rem}
+          nav{padding:0.8rem 1rem}
+          .nav-links{gap:0.8rem}
+          .hero{padding:3rem 1.2rem 2.5rem}
+          .hero-logo{width:100px;height:100px}
+          .carousel-slide{height:280px}
+          .slide-overlay{padding:1.2rem}
+          .slide-icon{font-size:2rem}
+          .slide-overlay h3{font-size:1.2rem}
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-logo">
+        <img src="images/flamingo_logo_hotpink.png" alt="Flamingos Divine Vintage logo">
+        <span>Flamingos Divine Vintage</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="#dates">Dates</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+    <img class="hero-logo" src="images/flamingo_logo_hotpink.png" alt="Flamingos Divine Vintage">
+    <p class="hero-eyebrow">Minneapolis, MN</p>
+    <h1>Flamingos <em>Divine</em> Vintage</h1>
+    <p class="hero-sub">Vintage &middot; Eclectic &middot; Arty &middot; Affordable</p>
+    <p class="hero-tagline">Furniture &nbsp;&middot;&nbsp; Decor &nbsp;&middot;&nbsp; Collectibles &nbsp;&middot;&nbsp; Jewelry &nbsp;&middot;&nbsp; Art</p>
+</section>
+
+<div class="next-sale-banner">
+    <p>Next Sale</p>
+    <strong id="next-sale-display">Loading...</strong>
+    <span id="next-sale-note" style="display:none;margin:0.4rem auto 0;background:rgba(0,0,0,0.25);padding:0.2rem 0.8rem;border-radius:2px;font-family:var(--serif);font-style:italic;font-size:0.85rem;letter-spacing:0.04em;"></span>
+    <span>Noon &ndash; 6 pm &nbsp;&middot;&nbsp; 3404 Cedar Ave S, Minneapolis MN</span>
+</div>
+
+<section class="carousel-section">
+    <div class="carousel-wrapper">
+        <div class="carousel-track" id="track">
+            <div class="carousel-slide slide-1" style="background-image:url('images/carousel/slide1.jpg')">
+                <div class="slide-overlay">
+                    <span class="slide-icon">🛋️</span>
+                    <h3>Furniture, Furniture, Furniture</h3>
+                    <p>Mid-century, retro, antique, rustic, upcycled, atomic, deco &mdash; one-of-a-kind pieces.</p>
+                </div>
+            </div>
+            <div class="carousel-slide slide-2" style="background-image:url('images/carousel/slide2.jpg')">
+                <div class="slide-overlay">
+                    <span class="slide-icon">💡</span>
+                    <h3>Lighting &amp; Decor</h3>
+                    <p>Lamps, mirrors, frames, architectural pieces, kitsch, glassware &mdash; curated by our vendors.</p>
+                </div>
+            </div>
+            <div class="carousel-slide slide-3" style="background-image:url('images/carousel/slide3.jpg')">
+                <div class="slide-overlay">
+                    <span class="slide-icon">💍</span>
+                    <h3>Jewelry &amp; Collectibles</h3>
+                    <p>Vintage jewelry, cameras, advertising art, and the unexpected finds that make the hunt worthwhile.</p>
+                </div>
+            </div>
+            <div class="carousel-slide slide-4" style="background-image:url('images/carousel/slide4.jpg')">
+                <div class="slide-overlay">
+                    <span class="slide-icon">🏡</span>
+                    <h3>Multi-Vendor Market</h3>
+                    <p>Each sale features multiple vendors bringing their own unique selection &mdash; no two sales are the same.</p>
+                </div>
+            </div>
+            <div class="carousel-slide slide-5" style="background-image:url('images/carousel/slide5.jpg')">
+                <div class="slide-overlay">
+                    <span class="slide-icon">✨</span>
+                    <h3>Vintage, Eclectic, Arty</h3>
+                    <p>Affordable treasures for every taste &mdash; open the second weekend of every month.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-btn prev" id="prev" aria-label="Previous">&#8592;</button>
+        <button class="carousel-btn next" id="next" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="carousel-dots" id="dots">
+        <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+        <button class="dot" data-index="1" aria-label="Slide 2"></button>
+        <button class="dot" data-index="2" aria-label="Slide 3"></button>
+        <button class="dot" data-index="3" aria-label="Slide 4"></button>
+        <button class="dot" data-index="4" aria-label="Slide 5"></button>
+    </div>
+</section>
+
+
+<div class="main-grid">
+    <div class="card" id="dates">
+        <h2 class="card-title">2026 Sale Dates</h2>
+        <ul class="dates-list" id="dates-list">
+            <li style="font-size:0.85rem;color:#aaa;font-style:italic">Loading...</li>
+        </ul>
+        <div class="hours-note">
+            Open <strong>Noon &ndash; 6 pm</strong> on sale dates only.<br>
+            Watch for pop-up sale announcements!
+        </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:2rem">
+        <div class="card" id="about">
+            <h2 class="card-title">About</h2>
+            <p class="about-text">Flamingos is an occasional sale featuring vendors who bring their own fun and unique selection of items &mdash; held the second weekend of each month, beginning Friday.</p>
+            <div class="tags">
+                <span class="tag">Furniture</span>
+                <span class="tag">Mid-Century</span>
+                <span class="tag">Antique</span>
+                <span class="tag">Rustic</span>
+                <span class="tag">Jewelry</span>
+                <span class="tag">Glassware</span>
+                <span class="tag">Lighting</span>
+                <span class="tag">Kitsch</span>
+                <span class="tag">Cameras</span>
+                <span class="tag">Mirrors</span>
+            </div>
+        </div>
+
+        <div class="card" id="contact">
+            <h2 class="card-title">Contact &amp; Find Us</h2>
+            <div class="contact-item">
+                <span class="contact-label">Address</span>
+                <span class="contact-value">3404 Cedar Ave S<br>Minneapolis, MN 55407</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Phone</span>
+                <a class="contact-link" href="tel:6127674548">612-767-4548</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Email</span>
+                <a class="contact-link" href="mailto:ashaneflor@aol.com">ashaneflor@aol.com</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Follow Us</span>
+                <div class="social-row">
+                    <a class="social-btn" href="https://www.facebook.com/flamingosdivinevintage/" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        Facebook
+                    </a>
+                    <a class="social-btn" href="https://www.instagram.com/YOURHANDLE" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="award-strip">
+    <strong>Best Vintage Furniture Store in Minnesota, 2016</strong> &mdash; Star Tribune
+</div>
+
+<footer>
+    <p>&copy; 2026 Flamingos Divine Vintage &nbsp;&middot;&nbsp; 3404 Cedar Ave S, Minneapolis MN &nbsp;&middot;&nbsp; <a href="mailto:ashaneflor@aol.com">ashaneflor@aol.com</a></p>
+</footer>
+
+<script>
+    const track = document.getElementById('track');
+    const dotsEl = document.querySelectorAll('.dot');
+    let current = 0;
+    const total = 5;
+    let timer = null;
+
+    function goTo(i) {
+      current = (i + total) % total;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dotsEl.forEach((d, idx) => d.classList.toggle('active', idx === current));
+    }
+
+    function startTimer() { timer = setInterval(() => goTo(current + 1), 4500); }
+
+    document.getElementById('prev').addEventListener('click', () => { clearInterval(timer); goTo(current - 1); startTimer(); });
+    document.getElementById('next').addEventListener('click', () => { clearInterval(timer); goTo(current + 1); startTimer(); });
+    dotsEl.forEach(d => d.addEventListener('click', () => { clearInterval(timer); goTo(parseInt(d.dataset.index)); startTimer(); }));
+    startTimer();
+
+    fetch('dates.txt')
+      .then(r => r.text())
+      .then(text => {
+        const lines = text.split('\n').map(l => l.trim()).filter(l => l);
+        const list = document.getElementById('dates-list');
+        const nextSaleEl = document.getElementById('next-sale-display');
+        list.innerHTML = '';
+        let nextSet = false;
+        lines.forEach(line => {
+          if (line.startsWith('Next Sale:')) {
+            const raw = line.replace('Next Sale:', '').trim();
+            const parts = raw.split('|');
+            const date = parts[0].trim();
+            const note = parts[1] ? parts[1].trim() : null;
+            if (!nextSet) {
+              nextSaleEl.textContent = date;
+              const noteEl = document.getElementById('next-sale-note');
+              if (note && noteEl) {
+                noteEl.textContent = note;
+                noteEl.style.display = 'inline-block';
+              }
+              nextSet = true;
+            }
+            return;
+          }
+          const parts = line.split('|');
+          const dateText = parts[0].trim();
+          const note = parts[1] ? parts[1].trim() : null;
+          const li = document.createElement('li');
+          const dot = document.createElement('span');
+          dot.className = 'date-dot';
+          li.appendChild(dot);
+          li.appendChild(document.createTextNode(dateText));
+          if (note) {
+            const badge = document.createElement('span');
+            badge.className = 'date-special';
+            badge.textContent = note;
+            li.appendChild(badge);
+          }
+          list.appendChild(li);
+        });
+        if (!nextSet) nextSaleEl.textContent = 'See dates below';
+      })
+      .catch(() => {
+        document.getElementById('dates-list').innerHTML = '<li style="font-size:0.85rem;color:#aaa;font-style:italic">See Facebook for upcoming dates</li>';
+        document.getElementById('next-sale-display').textContent = 'See Facebook page';
+      });
+</script>
+</body>
+</html>
