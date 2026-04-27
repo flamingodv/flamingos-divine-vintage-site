@@ -260,7 +260,7 @@
       dotsEl.forEach((d, idx) => d.classList.toggle('active', idx === current));
     }
 
-    function startTimer() { timer = setInterval(() => goTo(current + 1), 4500); }
+    function startTimer() { timer = setInterval(() => goTo(current + 1), 6000); }
 
     document.getElementById('prev').addEventListener('click', () => { clearInterval(timer); goTo(current - 1); startTimer(); });
     document.getElementById('next').addEventListener('click', () => { clearInterval(timer); goTo(current + 1); startTimer(); });
