@@ -94,7 +94,9 @@
         @media(max-width:600px){
           .main-grid{grid-template-columns:1fr;padding:2rem 1.2rem}
           nav{padding:0.8rem 1rem}
-          .nav-links{gap:0.8rem}
+          .nav-logo img{width:32px;height:32px}
+          .nav-logo span{font-size:0.75rem}
+          .nav-links{gap:0.8rem;flex-shrink:0}
           .hero{padding:3rem 1.2rem 2.5rem}
           .hero-logo{width:240px;height:240px}
           .carousel-slide{height:280px}
@@ -115,10 +117,10 @@
 <body>
 
 <nav>
-    <div class="nav-logo">
+    <a href="#" class="nav-logo" style="text-decoration:none">
         <img src="images/flamingo_logo_full.png" alt="Flamingos Divine Vintage logo">
         <span>Flamingos Divine Vintage</span>
-    </div>
+    </a>
     <ul class="nav-links">
         <li><a href="#dates">Dates</a></li>
         <li><a href="#about">About</a></li>
